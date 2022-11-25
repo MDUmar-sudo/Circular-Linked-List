@@ -377,7 +377,65 @@ void deleteSpecifiedNode(){
 Deletion functions ends
 */
 
+//Search function searches given node in the linked list
 
+void searchNode(){
+    cll *ptr;
+    int node_no=1;
+    if(tail==NULL){
+        printf("\nLINKED LIST IS EMPTY\n");
+        return;
+    }
+    else{
+        ptr = tail->next;
+        int key;
+        printf("\n");
+        rep(0,30) printf("-");
+        printf("\nENTER A NODE VALUE FOR SEARCHING : ");
+        scanf("%d",&key);
+        while(ptr->data!=key){
+            if(ptr->next==tail->next){
+              printf("\nNODE NOT FOUND!!\n");
+              rep(0,30) printf("-");
+              printf("\n");
+              return;
+            }
+            else
+                ++node_no;
+                ptr = ptr->next;
+        }
+        if(node_no==1) printf("\nNODE  %d FOUND @ %dst POSITION\n",ptr->data,node_no);
+        else if(node_no==2) printf("\nNODE  %d FOUND @ %dnd POSITION\n",ptr->data,node_no);
+        else if(node_no==3) printf("\nNODE  %d FOUND @ %drd POSITION\n",ptr->data,node_no);
+        else printf("\nNODE  %d FOUND @ %dth POSITION\n",ptr->data,node_no);
+        rep(0,30) printf("-");
+        printf("\n");
+    }
+}
+
+//Reverse the entire linked list
+
+void reverseList(){
+    cll *ptr,*prev,*next;
+    if(tail==NULL){
+        printf("\nLINKED LIST IS EMPTY\n");
+        return;
+    }
+    else{
+        ptr=tail->next;
+        prev=NULL;
+        next=ptr->next;
+        while(ptr!=tail){
+            prev = ptr;
+            ptr=next;
+            next=ptr->next;
+            ptr->next=prev;
+        }
+        next->next=tail;
+        tail=next;
+        printf("\nLINKED LIST IS REVERSED\n");
+    }
+}
 
 int main()
 {
@@ -389,7 +447,7 @@ int main()
     while(1){
 
             rep(0,30) printf("=");
-            printf("\n<-<-<-MAIN MENU->->->\n(1)CREATE\n(2)INSERT\n(3)DELETE\n(4)DISPLAY\n(5)EXIT\n");
+            printf("\n<-<-<-MAIN MENU->->->\n(1)CREATE\n(2)INSERT\n(3)DELETE\n(4)DISPLAY\n(5)SEARCH A NODE\n(6)REVERSE THE LIST\n(7)EXIT\n");
             rep(0,30) printf("-");
             printf("\nENTER YOUR CHOICE: ");
             scanf("%d",&choice);
@@ -466,7 +524,13 @@ int main()
                 case 4: display();
                         break;
 
-                case 5: exit(0);
+                case 5: searchNode();
+                        break;
+
+                case 6: reverseList();
+                        break;
+
+                case 7: exit(0);
                         break;
                 default: printf("WRONG OPTION SELCTED!!TRY AGAIN\n");
 
